@@ -1,0 +1,42 @@
+# A more realistic example: a small "disk report" tool, the kind of
+# thing you'd normally reach for bash for -- but with readable syntax,
+# real data structures, and functions instead of stringly-typed hacks.
+
+def human_count(n)
+  return "#{n} item" if n == 1
+  return "#{n} items"
+end
+
+def list_dir(path)
+  output = `ls -1 "#{path}" 2>/dev/null`
+  return [] if output.empty?
+  return output.split("\n")
+end
+
+def report(path)
+  entries = list_dir(path)
+  puts "Report for #{path}"
+  puts "-" * 40
+  puts "#{human_count(entries.length)} found"
+
+  if entries.empty?
+    puts "(nothing to show)"
+    return nil
+  end
+
+  entries.first(10).each do |name|
+    puts "  * #{name}"
+  end
+
+  if entries.length > 10
+    puts "  ... and #{entries.length - 10} more"
+  end
+end
+
+targets = ARGV
+targets = ["."] if targets.empty?
+
+targets.each do |t|
+  report(t)
+  puts
+end

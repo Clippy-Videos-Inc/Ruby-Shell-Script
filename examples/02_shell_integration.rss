@@ -1,0 +1,23 @@
+# Ruby Shell Script is meant to glue shell commands together with a
+# nicer syntax than POSIX sh. Run with: rssc examples/02_shell_integration.rss
+
+puts "Current directory listing (top 5):"
+listing = `ls -1`
+lines = listing.split("\n")
+lines.first(5).each do |f|
+  puts "  - #{f}"
+end
+
+puts
+puts "Running a command with sh() streams its output live:"
+sh("echo 'this line comes straight from the shell'")
+puts "sh() exit status was #{last_status()}"
+
+puts
+puts "Reading and writing OS environment variables with $NAME:"
+$GREETING = "set by rss"
+sh("echo \"the shell sees GREETING=$GREETING\"")
+puts "rss sees it too: #{$GREETING}"
+
+puts
+puts "Home directory via $HOME: #{$HOME}"

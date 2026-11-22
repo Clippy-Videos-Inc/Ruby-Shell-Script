@@ -1,0 +1,54 @@
+# Conditionals, loops and functions.
+
+def fizzbuzz(n)
+  if n % 15 == 0
+    return "FizzBuzz"
+  elsif n % 3 == 0
+    return "Fizz"
+  elsif n % 5 == 0
+    return "Buzz"
+  else
+    return n.to_s
+  end
+end
+
+(1..20).each do |n|
+  print fizzbuzz(n), " "
+end
+puts
+
+# postfix modifiers
+i = 0
+i += 1 while i < 5
+puts "i ended at #{i}"
+
+# loop + break/next
+count = 0
+loop do
+  count += 1
+  next if count % 2 == 0
+  break if count > 7
+  puts "odd count: #{count}"
+end
+
+# recursion + default args
+def power(base, exp = 2)
+  return 1 if exp == 0
+  return base * power(base, exp - 1)
+end
+puts "power(3) = #{power(3)}"
+puts "power(2, 10) = #{power(2, 10)}"
+
+# begin/rescue/ensure
+def safe_divide(a, b)
+  begin
+    return a / b
+  rescue => e
+    puts "error dividing: #{e}"
+    return nil
+  ensure
+    puts "safe_divide(#{a}, #{b}) finished"
+  end
+end
+puts safe_divide(10, 2)
+puts safe_divide(10, 0)

@@ -1,0 +1,12 @@
+# A first look at Ruby Shell Script.
+# Run with: rssc examples/01_hello.rss
+
+name = ARGV[0]
+name = "World" if name.nil?
+
+puts "Hello, #{name}!"
+puts "This script is running as #{SCRIPT_NAME}"
+
+if ARGV.empty?
+  puts "Tip: try `rssc examples/01_hello.rss YourName`"
+end

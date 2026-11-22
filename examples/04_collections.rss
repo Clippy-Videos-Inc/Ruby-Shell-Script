@@ -1,0 +1,39 @@
+# Arrays, hashes and ranges.
+
+fruits = ["apple", "banana", "cherry", "date"]
+puts "All fruits: #{fruits.join(", ")}"
+puts "Upcased: #{fruits.map do |f| f.upcase end}"
+
+long_fruits = fruits.select do |f|
+  f.length > 5
+end
+puts "Fruits with more than 5 letters: #{long_fruits.inspect}"
+
+total_letters = fruits.reduce(0) do |sum, f|
+  sum + f.length
+end
+puts "Total letters: #{total_letters}"
+
+inventory = {
+  apple: 10,
+  banana: 5,
+  cherry: 20,
+}
+
+inventory.each do |name, qty|
+  puts "#{name}: #{qty} in stock"
+end
+
+low_stock = inventory.select do |name, qty|
+  qty < 10
+end
+puts "Low stock: #{low_stock.inspect}"
+
+evens = (1..30).to_a.select do |n|
+  n.even?
+end
+puts "Even numbers 1..30: #{evens.inspect}"
+puts "Their sum: #{evens.sum}"
+
+nested = [[1, 2], [3, [4, 5]], 6]
+puts "Flattened: #{nested.flatten.inspect}"
